@@ -1,0 +1,26 @@
+DELIMITER $$
+
+CREATE PROCEDURE add_phone( IN incustId int, IN inphonetype varchar( 20 ) , IN inphonenumber int, out result varchar( 255 ) ) BEGIN DECLARE phonecount int;
+
+SET transaction ISOLATION level SERIALIZABLE ;
+
+START transaction;
+
+SELECT count( * )
+FROM Phone
+WHERE incustId = cust_id into phonecount;
+
+IF phonecount < 3 OR phonecount IS NULL THEN INSERT INTO Phone( cust_id, phone_type, phone_number )
+VALUES (
+incustId, inphonetype, inphonenumber
+);
+
+SET result = 'OK';
+
+ELSE SET result = 'Customer cannot have more than 3 types of phone on file';
+
+END IF ;
+
+COMMIT ;
+
+END

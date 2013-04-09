@@ -1,0 +1,7 @@
+Customer wants to see the amount Purchase he/she has done - one by one
+
+CREATE VIEW purchase_amount as
+SELECT Transactions.cust_id, Transactions.transaction_id, Transaction_Items.item_id, Inventory.item_code, Inventory.item_department, Inventory.item_description, Inventory.item_price
+FROM Inventory, Transaction_Items
+JOIN Transactions ON Transaction_Items.transaction_id = Transactions.transaction_id
+WHERE Inventory.item_id = Transaction_Items.item_id

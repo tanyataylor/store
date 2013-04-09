@@ -1,0 +1,29 @@
+CREATE FUNCTION rating(price DECIMAL(6,2)) RETURNS VARCHAR(255)
+BEGIN
+IF price >= 750.01 THEN
+RETURN 'You are a golden membership customer. Congratulations!';
+ELSEIF price >= 500.01 THEN
+RETURN 'You are a silver membership customer!';
+ELSEIF price >= 250.01 THEN
+RETURN 'Please continue shopping with us!';
+ELSE
+RETURN 'Welcome to our membership club. You will earn points with each purchase.';
+
+
+DELIMITER $
+CREATE FUNCTION lettergrade(ingrade DECIMAL(5,2)) RETURNS CHAR(1)
+BEGIN
+  IF ingrade >= 89.5 THEN
+    RETURN 'A';
+  ELSEIF ingrade >= 79.5 THEN 
+    RETURN 'B';
+  ELSEIF ingrade >= 69.5 THEN 
+    RETURN 'C';
+  ELSEIF ingrade >= 59.5 THEN 
+    RETURN 'D';
+  ELSE
+    RETURN 'F';
+  END IF;	
+END$
+
+DELIMITER ;
